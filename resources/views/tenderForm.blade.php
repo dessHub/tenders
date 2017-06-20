@@ -155,8 +155,9 @@
     <div class="col-md-12 " style="padding-left:30px; padding-top:20px;">
       <div> <h4>Tender Category : <i></i>{{ $key->category }} </h4>
       <p>{{ $key->description }}</p>
-      <div>{{ $key->file }}</div>
-      <div class="btn btn-default" style="margin-left:100px; margin-top:20px;"><i class="fa fa-download"></i>Download</div>
+
+      <a href="{{ URL::to( '../public/uploads/' . $key->file)  }}" target="_blank" style="margin-left:100px; margin-top:20px;"><i class="fa fa-download"></i>Download</a>
+  
     </div>
   </div>
     <div class="col-md-12" style="">

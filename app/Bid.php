@@ -12,7 +12,7 @@ class Bid extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'title', 'tender_id', 'user_id', 'c_name', 'kra_pin', 'proposa',
+        'title', 'tender_id', 'user_id', 'c_name', 'kra_pin', 'proposal', 'file',
     ];
 
     /**

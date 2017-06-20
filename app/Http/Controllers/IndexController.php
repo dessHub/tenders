@@ -124,7 +124,7 @@ class IndexController extends Controller
     }
 
 
-      protected function bidTender() {
+      protected function bidTender(Request $request) {
        $rules = array(
                'title' => 'required|max:100',
                'tender_id' => 'required|max:100',
@@ -164,9 +164,24 @@ class IndexController extends Controller
          $bid->c_name     = Input::get('c_name');
          $bid->user_id     = Auth::user()->id;
          $bid->kra_pin     = Input::get('kra_pin');
+         $bid->file       = $request->file;
 
          // save report
          $bid->save();
+
+           $fileName = $bid->id . '.' .
+           $request->file('file')->getClientOriginalExtension();
+
+           $request->file('file')->move(
+               base_path() . '/public/uploads', $fileName
+           );
+
+        $pat = '/public/uploads/'.$fileName;
+
+           $tend_obj = new Bid();
+           $tend_obj->id = $bid->id;
+           $tend = Bid::find($tend_obj->id); // Eloquent Model
+           $tend->update(['file' => $pat]);
 
          // redirect ----------------------------------------
          // redirect our user back to the form so they can do it all over again

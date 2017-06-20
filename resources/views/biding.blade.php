@@ -7,7 +7,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Register</div>
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/proposal') }}">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/proposal') }}" enctype="multipart/form-data">
                         {{ csrf_field() }}
 
                             <div class="col-md-12">
@@ -81,7 +81,23 @@
 
                    </div>
 
-                     <div class="col-md-4" style="padding-top:30px;">
+                   <div class="col-md-3">
+                    <div class="form-group{{ $errors->has('file') ? ' has-error' : '' }}">
+                        <label for="file" class="col-md-12 control-label">Upload Proposal File:</label>
+
+                        <div class="col-md-12" style="padding-top:20px;">
+                             <input class="form-control" type="file" name="file" required="true">
+
+                             @if ($errors->has('file'))
+                                 <span class="help-block">
+                                     <strong>{{ $errors->first('file') }}</strong>
+                                 </span>
+                             @endif
+                        </div>
+                    </div>
+                   </div>
+
+                     <div class="col-md-3" style="padding-top:30px;">
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">

@@ -29,6 +29,9 @@
                   {{$key->proposal}}
               </div>
          </div>
+         <div class="col-md-offset-3 col-md-4">
+            <a href="{{ URL::to( '..' . $key->file)  }}" target="_blank" style="margin-left:100px; margin-top:20px;"><i class="fa fa-download"></i>Download Proposal File</a>
+         </div>
 
             </div>
         </div>
