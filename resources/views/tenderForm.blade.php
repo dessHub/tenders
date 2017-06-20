@@ -13,7 +13,7 @@
 
                 <div class="panel-body">
 
-                      <form class="form-horizontal" role="form" method="POST" action="{{ url('/addTender') }}">
+                      <form class="form-horizontal" role="form" method="POST" action="{{ url('/addTender') }}" enctype="multipart/form-data">
                           {{ csrf_field() }}
 
                               <div class="col-md-12">
@@ -155,6 +155,7 @@
     <div class="col-md-12 " style="padding-left:30px; padding-top:20px;">
       <div> <h4>Tender Category : <i></i>{{ $key->category }} </h4>
       <p>{{ $key->description }}</p>
+      <div>{{ $key->file }}</div>
       <div class="btn btn-default" style="margin-left:100px; margin-top:20px;"><i class="fa fa-download"></i>Download</div>
     </div>
   </div>

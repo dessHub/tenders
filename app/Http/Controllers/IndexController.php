@@ -7,10 +7,9 @@ use App\Tender;
 use App\Bid;
 use Validator;
 use Auth;
-use App\Http\Requests;
-use Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Http\Request;
 use Mail;
 
 class IndexController extends Controller
@@ -54,7 +53,7 @@ class IndexController extends Controller
    }
 
 
-  protected function addTender() {
+  protected function addTender(Request $request) {
    $rules = array(
            'title' => 'required|max:100',
            'date' => 'required|max:100',
@@ -86,9 +85,25 @@ class IndexController extends Controller
      $tender->dateline     = Input::get('date');
      $tender->description     = Input::get('description');
      $tender->category     = Input::get('org_type');
+     $tender->file     = $request->file;
+      $tender->save();
+
+        $fileName = $tender->id . '.' .
+        $request->file('file')->getClientOriginalExtension();
+
+        $request->file('file')->move(
+            base_path() . '/public/uploads', $fileName
+        );
+
+     $pat = '/public/uploads/'.$fileName;
+
+        $tend_obj = new Tender();
+        $tend_obj->id = $tender->id;
+        $tend = Tender::find($tend_obj->id); // Eloquent Model
+        $tend->update(['file' => $pat]);
 
      // save report
-     $tender->save();
+
 
      // redirect ----------------------------------------
      // redirect our user back to the form so they can do it all over again
